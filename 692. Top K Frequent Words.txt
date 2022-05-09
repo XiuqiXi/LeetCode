@@ -1,0 +1,42 @@
+class Solution:
+    def topKFrequent(self, words: List[str], k: int) -> List[str]:
+        hashTable = {}
+        
+        for item in words:
+            if not(item in hashTable):
+                hashTable[item] = 1
+            else:
+                temp = hashTable[item]
+                hashTable[item] = temp + 1
+                
+        minHeap = []
+        
+        for key, value in hashTable.items():
+            heapq.heappush(minHeap, Node(key, value))
+            
+        ret = []
+            
+        while len(minHeap)>0:
+            temp = heapq.heappop(minHeap)
+            if len(minHeap)<k:
+                ret.append(temp.key)
+                
+        ret.reverse()
+        return ret
+            
+            
+class Node:
+    def __init__(self, key, value):
+        self.key = key
+        self.value = value
+        
+    def __lt__(self, other):
+        if self.value < other.value:
+            return True
+        elif self.value == other.value and self.key > other.key:
+            return True
+        elif self.value == other.value and self.key < other.key:
+            return False
+        else:
+            return False
+    

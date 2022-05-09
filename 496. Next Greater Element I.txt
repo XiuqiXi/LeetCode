@@ -1,0 +1,20 @@
+class Solution:
+    def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        
+        hashMax = {}
+        stack = []
+        
+        for num in nums2:
+            while stack and num>stack[-1]:
+                hashMax[stack.pop()] = num
+            stack.append(num)
+            
+        print(hashMax)
+            
+        for count, num in enumerate(nums1):
+            if num in hashMax:
+                nums1[count] = hashMax[num]
+            else:
+                nums1[count] = -1
+                
+        return nums1

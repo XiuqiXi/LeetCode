@@ -1,0 +1,13 @@
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        
+        output = {}
+        
+        for index, value in enumerate(nums):
+            residual = target - value
+            if residual in output:
+                return(index, output[residual])
+                
+            
+            
+            output[value] = index

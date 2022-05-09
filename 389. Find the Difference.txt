@@ -1,0 +1,25 @@
+class Solution:
+    def findTheDifference(self, s: str, t: str) -> str:
+        maps = {}
+        mapt = {}
+                   
+        for i in s:
+            if not(i in maps):
+                maps[i] = 1
+            else:
+                temp = maps[i]
+                maps[i] = temp+1
+
+        for i in t:
+            if not(i in mapt):
+                mapt[i] = 1
+            else:
+                temp = mapt[i]
+                mapt[i] = temp+1
+                
+        for i in mapt:
+            if not(i in maps):
+                return i
+            elif maps[i] != mapt[i]:
+                return i
+        
