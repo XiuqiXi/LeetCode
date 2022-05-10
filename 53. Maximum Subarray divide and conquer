@@ -1,0 +1,31 @@
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        return self.getMax(nums, 0, len(nums)-1)
+    
+    def getMax(self, nums, left, right):
+        mid = left + (right-left)//2
+        if left == right:
+            return nums[left]
+        leftMax = self.getMax(nums, left, mid)
+        rightMax = self.getMax(nums, mid+1, right)
+        middleMax = self.getCross(nums, left, right)
+        
+        return max(leftMax, rightMax, middleMax)
+    
+    def getCross(self, nums, left, right):
+        mid = left + (right-left)//2
+        leftSum = nums[mid]
+        leftMax = leftSum
+        
+        for i in range(mid-1, left-1, -1):
+            leftSum = leftSum + nums[i]
+            leftMax = max(leftSum, leftMax)
+            
+        rightSum = nums[mid+1]
+        rightMax = rightSum
+        
+        for i in range(mid+2, right+1):
+            rightSum = rightSum + nums[i]
+            rightMax = max(rightSum, rightMax)
+            
+        return rightMax + leftMax
