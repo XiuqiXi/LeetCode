@@ -1,0 +1,29 @@
+class Solution:
+    def reverse(self, x: int) -> int:
+        
+        x_temp = abs(x)
+
+        times = 1        
+        Time = []
+        Time.append(times)
+        digits = []
+        
+        while x_temp != 0:
+            D = x_temp % 10
+            x_temp = int((x_temp - D)/10)
+            digits.append(D)
+            times = times*10
+            Time.append(times)
+                    
+        Time.pop()
+        Time.reverse()
+
+        output = 0
+        for i in range(0, len(Time)):
+            output = output + Time[i]*digits[i]
+            
+        if x>0:
+            return output
+        else:
+            return -output
+        
