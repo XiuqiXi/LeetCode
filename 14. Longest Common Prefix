@@ -1,0 +1,9 @@
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        shortest = min(strs,key=len)
+        
+        for i, s in enumerate(shortest):
+            for other in strs:
+                if other[i] != s:
+                    return other[:i]
+        return shortest
